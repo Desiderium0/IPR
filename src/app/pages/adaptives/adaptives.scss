@@ -1,0 +1,32 @@
+.parent {
+  display: flex;
+  justify-content: center;
+  max-width: 1536px;
+  min-height: 500px;
+  background-color: #7c0000;
+}
+
+.list__child {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 450px;
+  max-height: 400px;
+  gap: 10px;
+}
+
+.child {
+  background-color: #10c500;
+  max-width: 200px;
+  width: 100%;
+  word-break: break-all;
+  &:last-child {
+    grid-column: span 2;
+    max-width: 100%;
+  }
+}
+
+.circle {
+  background-color: aqua;
+  min-height: 40px;
+  min-width: 40px;
+}
