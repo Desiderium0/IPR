@@ -8,7 +8,8 @@ import {
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { itc1Interceptor } from 'app/shared/interceptors/itc1-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +18,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideEventPlugins(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([itc1Interceptor])),
   ],
 };
