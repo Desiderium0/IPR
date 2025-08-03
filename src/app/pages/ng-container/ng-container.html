@@ -1,0 +1,10 @@
+<!-- NgIf it was DEPRECATED in Angular v20 -->
+<ng-container *ngIf="!true; else forms"> Block 1 ng-container </ng-container>
+<ng-template #forms> Block 1 ng-template </ng-template>
+
+<!-- Actuality -->
+@if(isActive()) {
+<div>Block 2 &#64;if</div>
+} @else {
+<div>Block 2 &#64;else</div>
+}
