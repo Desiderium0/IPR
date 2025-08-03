@@ -1,11 +1,12 @@
 import { TuiRoot } from '@taiga-ui/core';
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { WelcomePage } from './pages/welcome-page/welcome-page';
+import { PostComponent } from 'app/pages/post/post.component';
+import { NgContainer } from 'app/pages/ng-container/ng-container';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TuiRoot, WelcomePage],
+  imports: [RouterOutlet, TuiRoot, PostComponent, NgContainer],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

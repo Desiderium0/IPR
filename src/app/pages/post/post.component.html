@@ -1,0 +1,23 @@
+<div class="send">
+  <button (click)="load()">Load todo</button>
+  <button (click)="activate()">Hide todo list</button>
+  @if (isActive()) {
+  <ul>
+    @for (td of todo; track td.id) {
+    <li>
+      {{ td.id }}
+    </li>
+    <li>
+      {{ td.title }}
+    </li>
+    }
+  </ul>
+  }
+
+  <form method="post" [formGroup]="todoFormGroup">
+    <div>
+      <input type="text" formControlName="title" />
+    </div>
+    <button tuiButton (click)="send()" type="submit">Отправить</button>
+  </form>
+</div>
