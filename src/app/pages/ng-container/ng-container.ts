@@ -9,4 +9,8 @@ import { Component, signal } from '@angular/core';
 })
 export class NgContainer {
   protected isActive = signal(true);
+
+  public activateBlock(): void {
+    this.isActive.update((value) => !value);
+  }
 }
