@@ -4,11 +4,10 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
+    "module": "CommonJs",
     "types": [
-      "jasmine"
+      "jest"
     ]
   },
-  "include": [
-    "src/**/*.ts"
-  ]
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
 }

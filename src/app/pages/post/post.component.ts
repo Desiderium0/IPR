@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
-import { ToDo } from 'app/shared/types/todo';
-import { RequestService } from 'app/shared/services/request.service';
+import { ToDo } from 'src/app/shared/types/todo';
+import { RequestService } from 'src/app/shared/services/request.service';
 import {
   FormControl,
   FormGroup,
@@ -59,7 +59,7 @@ export class PostComponent {
         if (this.formTodo) {
           this.formTodo.title = titleValue ?? 'NULL';
           this.request.putPost(this.formTodo).subscribe();
-          console.log('Успешно отправлено проверяйте список!');
+          console.log('Успешно отправлено dictionary проверяйте список!');
         }
       }
     } catch (error) {
