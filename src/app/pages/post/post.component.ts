@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ToDo } from 'src/app/shared/types/todo';
 import { RequestService } from 'src/app/shared/services/request.service';
 import {
+  FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -18,6 +19,7 @@ import { TuiButton } from '@taiga-ui/core';
 })
 export class PostComponent {
   private request = inject(RequestService);
+  private _fb = inject(FormBuilder);
   protected isActive = signal(true);
 
   todo?: ToDo[] = [];
@@ -35,6 +37,25 @@ export class PostComponent {
     description: new FormControl('null'),
     created: new FormControl('null'),
     lastUpdated: new FormControl('null'),
+  });
+
+  protected FormGroup = new FormGroup({
+    title: new FormControl('Base text', [Validators.required]),
+    description: new FormControl('null'),
+    created: new FormControl('null'),
+    lastUpdated: new FormControl('null'),
+  });
+
+  //  ^  форм группа можно писать сложные валидации
+  //  |    |
+  //  |    |
+  //       V  форм билдер сокращенная запись
+
+  protected todoForm = this._fb.group({
+    title: ['title', [Validators.required]],
+    description: ['description'],
+    created: ['created'],
+    lastUpdated: ['lastUpdated'],
   });
 
   public activate(): void {
