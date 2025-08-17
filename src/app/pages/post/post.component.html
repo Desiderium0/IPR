@@ -1,9 +1,12 @@
 <div class="send">
   <button (click)="load()">Load todo</button>
-  <button (click)="activate()">Hide todo list</button>
-  @if (isActive()) {
+  <button (click)="activate()">
+    {{ isActive() ? "Hide" : "Show" }} todo list
+  </button>
+  <button (click)="sortByAsc()">Сортировка по возрастанию</button>
+  @if (isActive()) { @if(todoList$ | async; as todoList) {
   <ul>
-    @for (td of todo; track td.id) {
+    @for (td of todoList; track td.id) {
     <li>
       {{ td.id }}
     </li>
@@ -12,7 +15,7 @@
     </li>
     }
   </ul>
-  }
+  } }
 
   <form method="post" [formGroup]="todoFormGroup">
     <div>
@@ -20,4 +23,17 @@
     </div>
     <button tuiButton (click)="send()" type="submit">Отправить</button>
   </form>
+</div>
+
+<h1>{{ "Проверка пайпа должно быть все ок" | upperTotwo }}</h1>
+
+<div class="customControl" [formGroup]="controlAccessorGroup">
+  <app-rate formControlName="controlCounter"></app-rate>
+  @if (controlAccessorGroup.controls.controlCounter.hasError('max')) { 10 }
+  <app-rate formControlName="controlChecker"></app-rate>
+  @if (controlAccessorGroup.controls.controlChecker.hasError('required')) {
+  require }
+  <app-rate formControlName="controlText"></app-rate>
+  @if (controlAccessorGroup.controls.controlText.hasError('nonFive')) { require
+  }
 </div>

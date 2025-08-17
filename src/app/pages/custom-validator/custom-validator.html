@@ -1,0 +1,7 @@
+<div [formGroup]="form">
+  <label for="validator">Введите текст</label>
+  <input type="text" id="validator" formControlName="text" />
+  @if (form.controls.text.hasError('nonFive')) {
+  <div>Ошибка в тексте есть цифра 5</div>
+  }
+</div>

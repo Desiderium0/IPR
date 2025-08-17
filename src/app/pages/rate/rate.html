@@ -1,0 +1,16 @@
+<div class="formGroup" [formGroup]="form">
+  <br />
+  <button (click)="increment()">Up</button>
+  <div class="counter">Счетчик {{ counter }} - ConrolValueAccessor</div>
+  <button (click)="dicrement()">Down</button>
+  <br />
+  <input type="checkbox" formControlName="checkingBox" (blur)="onTouched()" />
+  <br />
+  <input
+    type="text"
+    formControlName="text"
+    (input)="onInputChanges($event)"
+    (blur)="onTouched()"
+  />
+  <br />
+</div>

@@ -9,37 +9,28 @@ import {
   Validators,
 } from '@angular/forms';
 import { TuiButton } from '@taiga-ui/core';
+import { Observable, of } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { UpperTotwoPipe } from 'src/app/shared/pipes/upper-totwo-pipe';
+import { SortTodoPipe } from 'src/app/shared/pipes/sort-todo-pipe';
+import { Rate } from 'src/app/pages/rate/rate';
+import { NonNumberFiveValidator } from 'src/app/shared/validators/nonNumberFive';
 
 @Component({
   standalone: true,
   selector: 'app-post',
-  imports: [ReactiveFormsModule, TuiButton],
+  imports: [ReactiveFormsModule, TuiButton, AsyncPipe, UpperTotwoPipe, Rate],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
 })
 export class PostComponent {
-  private request = inject(RequestService);
+  private request = inject(RequestService); // Для C# API  #1
   private _fb = inject(FormBuilder);
+  private pipe = new SortTodoPipe();
+  protected todoList$: Observable<ToDo[]> = of();
   protected isActive = signal(true);
 
-  todo?: ToDo[] = [];
-  formTodo?: ToDo = {
-    id: 0,
-    title: 'string',
-    description: 'string',
-    created: '2025-07-13T15:15:04.428Z',
-    lastUpdated: '2025-07-13T15:15:04.428Z',
-    isCompleted: true,
-  };
-
   protected todoFormGroup = new FormGroup({
-    title: new FormControl('Base text', [Validators.required]),
-    description: new FormControl('null'),
-    created: new FormControl('null'),
-    lastUpdated: new FormControl('null'),
-  });
-
-  protected FormGroup = new FormGroup({
     title: new FormControl('Base text', [Validators.required]),
     description: new FormControl('null'),
     created: new FormControl('null'),
@@ -63,12 +54,8 @@ export class PostComponent {
   }
 
   public load(): void {
-    this.request
-      .getPosts()
-      .pipe()
-      .subscribe((data) => {
-        this.todo = data;
-      });
+    this.todoList$ = MockTodo.getToDo();
+    this.request.getPosts(); // Для C# API  #1
   }
 
   public send(): void {
@@ -76,15 +63,66 @@ export class PostComponent {
       const controls = this.todoFormGroup.controls;
       if (this.todoFormGroup.valid) {
         const titleValue = controls.title.value;
-
-        if (this.formTodo) {
-          this.formTodo.title = titleValue ?? 'NULL';
-          this.request.putPost(this.formTodo).subscribe();
-          console.log('Успешно отправлено dictionary проверяйте список!');
-        }
       }
     } catch (error) {
       console.log(error);
     }
+  }
+
+  public sortByAsc(): void {
+    this.todoList$ = this.pipe.transform(this.todoList$);
+  }
+
+  public controlAccessorGroup = this._fb.group({
+    controlCounter: [0, Validators.max(10)],
+    controlChecker: [0, Validators.required],
+    controlText: ['', NonNumberFiveValidator],
+  });
+}
+
+class MockTodo {
+  static getToDo(): Observable<ToDo[]> {
+    return of<ToDo[]>([
+      {
+        id: 82,
+        title: 'title',
+        description: 'description',
+        created: 'created',
+        lastUpdated: 'lastUpdated',
+        isCompleted: false,
+      },
+      {
+        id: 100,
+        title: 'title',
+        description: 'description',
+        created: 'created',
+        lastUpdated: 'lastUpdated',
+        isCompleted: false,
+      },
+      {
+        id: 2,
+        title: 'title',
+        description: 'description',
+        created: 'created',
+        lastUpdated: 'lastUpdated',
+        isCompleted: false,
+      },
+      {
+        id: 81,
+        title: 'title',
+        description: 'description',
+        created: 'created',
+        lastUpdated: 'lastUpdated',
+        isCompleted: false,
+      },
+      {
+        id: 31,
+        title: 'title',
+        description: 'description',
+        created: 'created',
+        lastUpdated: 'lastUpdated',
+        isCompleted: false,
+      },
+    ]);
   }
 }
