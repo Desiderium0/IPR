@@ -1,0 +1,23 @@
+.object {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid black;
+    border-radius: 5px;
+    gap: 30px;
+    transition: background-color 0.6s, transform 1s;
+
+    &:hover {
+      background-color: aqua;
+      cursor: pointer;
+      transform: scale(105%);
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.header {
+  background-color: darkgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  &__nav {
+    background-color: aquamarine;
+
+    display: flex;
+    justify-content: space-around;
+    max-width: 1500px;
+    width: 100%;
+  }
+}
