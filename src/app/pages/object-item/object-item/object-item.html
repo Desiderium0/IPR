@@ -1,1 +1,8 @@
-<p>object-item works!</p>
+<div>
+  @if (objects) {
+  <p>{{ objects.id }}</p>
+  <p>{{ objects.title }}</p>
+  <p>{{ objects.content }}</p>
+  }
+</div>
+<button routerLink="/object-list">Назад</button>
