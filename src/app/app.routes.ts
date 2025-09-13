@@ -3,6 +3,7 @@ import { Adaptives } from './pages/adaptives/adaptives';
 import { CustomValidator } from './pages/custom-validator/custom-validator';
 import { Page404 } from './shared/components/page404/page404';
 import { ObjectList } from './pages/object-list/object-list';
+import { Leaflet } from './pages/leaflet/leaflet';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,10 @@ export const routes: Routes = [
   {
     path: 'page-one',
     component: Adaptives,
+  },
+  {
+    path: 'leaflet',
+    loadComponent: () => import('./pages/leaflet/leaflet').then((m) => Leaflet),
   },
   {
     path: 'object-list',
